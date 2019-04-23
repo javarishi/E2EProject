@@ -2,8 +2,11 @@ package com.h2k.model;
 
 import java.sql.Timestamp;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
 
 // TO. DTO. Bean. Persistent
+@XStreamAlias("actor")
 public class ActorDTO {
 	
 	public ActorDTO() {
