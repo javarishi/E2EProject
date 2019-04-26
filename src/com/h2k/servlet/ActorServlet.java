@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.h2k.bo.ActorBO;
+import com.h2k.dao.DBUtil;
 import com.h2k.exception.InvalidActorException;
 import com.h2k.model.ActorDTO;
 
@@ -39,12 +40,18 @@ public class ActorServlet extends HttpServlet{
 		
 		try {
 			int num = actorBO.executeInsertActor(actor);
+			actorBO.executeGetActors();
 			if(num > 0) {
+				result.append("<p> " + DBUtil.getCompanyName() +" </p>");
 				result.append("<p> Actor Inserted Successfully </p>");
+				// Send success message to queue : NEW.ACTOR.QUEUE
 			}else {
 				result.append("<p> Actor NOT Inserted Successfully. But No exceptions </p>");
 			}
 		} catch (InvalidActorException e) {
+			result.append("<p> " + e.getMessage() + " </p>");
+			//e.printStackTrace();
+		}catch (Exception e) {
 			result.append("<p> " + e.getMessage() + " </p>");
 			//e.printStackTrace();
 		}

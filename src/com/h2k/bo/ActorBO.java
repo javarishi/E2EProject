@@ -1,5 +1,7 @@
 package com.h2k.bo;
 
+import java.util.List;
+
 import com.h2k.dao.ActorDAO;
 import com.h2k.exception.InvalidActorException;
 import com.h2k.model.ActorDTO;
@@ -12,6 +14,9 @@ public class ActorBO {
 		dao = new ActorDAO();
 	}
 	
+	public List<ActorDTO> executeGetActors() throws Exception{
+			return dao.getActors();
+	}
 	
 	public int executeInsertActor(ActorDTO actor) throws InvalidActorException{
 		int result = 0;
